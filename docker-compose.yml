@@ -15,7 +15,7 @@ services:
 
   backend:
     build:
-      context: ./elections-backend  # Points to the correct directory
+      context: ./elections-backend  # Use elections-backend as the build context
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
