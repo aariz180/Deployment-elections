@@ -15,9 +15,8 @@ services:
 
   backend:
     build:
-      context: ./elections-backend  # Points to the elections-backend directory
+      context: ./elections-backend  # Points to the correct directory
       dockerfile: Dockerfile
-      target: backend-runtime
     ports:
       - "8080:8080"
     environment:
@@ -25,3 +24,4 @@ services:
       - SPRING_DATASOURCE_USERNAME=eijky1
       - SPRING_DATASOURCE_PASSWORD=dDeaGhAyipadFk.t
       - SERVER_PORT=8080
+
