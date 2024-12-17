@@ -9,8 +9,8 @@ RUN mvn dependency:go-offline
 
 # Copy source files and build
 COPY elections-backend/src ./src
-COPY build-running.txt .
-COPY build-success.txt .
+COPY ../build-running.txt .
+COPY ../build-success.txt .
 RUN mvn clean install -DskipTests
 
 # Backend Runtime Stage
