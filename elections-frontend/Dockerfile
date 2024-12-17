@@ -4,13 +4,13 @@ FROM node:18 AS frontend-builder
 WORKDIR /app
 
 # Copy dependency files for caching
-COPY elections-frontend/package.json elections-frontend/package-lock.json ./
+COPY package.json package-lock.json ./
 
 # Install dependencies in production mode
 RUN npm ci
 
 # Copy application source and build
-COPY elections-frontend/ ./
+COPY ./ ./
 RUN npm run build
 
 # Frontend Runtime Stage

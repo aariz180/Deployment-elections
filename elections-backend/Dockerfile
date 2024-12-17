@@ -4,13 +4,13 @@ FROM maven:3.9.9 AS backend-builder
 WORKDIR /elections-backend
 
 # Cache Maven dependencies
-COPY elections-backend/pom.xml ./
+COPY pom.xml ./
 RUN mvn dependency:go-offline
 
 # Copy source files and build
-COPY elections-backend/src ./src
-COPY ../build-running.txt .
-COPY ../build-success.txt .
+COPY src ./src
+COPY build-running.txt .
+COPY build-success.txt .
 RUN mvn clean install -DskipTests
 
 # Backend Runtime Stage
