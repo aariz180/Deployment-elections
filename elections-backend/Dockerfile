@@ -3,11 +3,11 @@ FROM maven:3.9.9 AS backend-builder
 
 WORKDIR /elections-backend
 
-# Copy necessary files from the current directory
-COPY pom.xml ./pom.xml
-COPY src ./src
-COPY build-running.txt ./build-running.txt
-COPY build-success.txt ./build-success.txt
+# Copy necessary files using full paths from the build context
+COPY elections-backend/pom.xml ./pom.xml
+COPY elections-backend/src ./src
+COPY elections-backend/build-running.txt ./build-running.txt
+COPY elections-backend/build-success.txt ./build-success.txt
 
 # Download dependencies and build the application
 RUN mvn clean install -DskipTests
