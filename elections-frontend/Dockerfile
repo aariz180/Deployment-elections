@@ -19,6 +19,14 @@ FROM nginx:alpine AS frontend-runtime
 # Copy built frontend files
 COPY --from=frontend-builder /app/dist /usr/share/nginx/html
 
+# Add custom Nginx configuration
+RUN echo 'server { \
+    listen 80; \
+    location / { \
+        try_files $uri /index.html; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
+
 # Expose nginx port
 EXPOSE 80
 
