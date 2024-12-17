@@ -1,0 +1,81 @@
+%% NOTE: Make sure that you use the Mermaid plug in to see the diagram!
+
+erDiagram
+    User {
+        int id PK
+        varchar(250) name
+        varchar(250) email
+        varchar(250) password
+        int political_orientation
+        datetime created_at
+        datetime updated_at
+    }
+    UserPartyTags {
+        int user_id FK
+        int party_id FK
+    }
+    Forum {
+        int id PK
+        int user_id FK
+        varchar(250) title
+        text content
+        timestamp datetime
+    }
+    ForumCategory {
+        int forum_id FK
+        int forum_tag_id FK
+    }
+    Message {
+        int id PK
+        int user_id FK
+        int forum_id FK
+        text content
+        timestamp datetime
+    }
+    Tag {
+        int id PK
+        varchar(250) name
+        text description
+    }
+    PartyTags {
+        int id PK
+        int tag_id FK
+    }
+    ForumTags {
+        int id PK
+        int tag_id FK
+    }
+    NewsTags {
+        int id PK
+        int tag_id FK
+    }
+    PoliticalNewsCategory {
+        int news_tag_id FK
+        int news_id FK
+    }
+    PoliticalNews {
+        int id PK
+        VARCHAR(250) img_path
+        varchar(250) title
+        text content
+    }
+
+    User ||--o{ Forum : "creates many"
+    User ||--o{ Message : "posts many"
+    Forum ||--o{ Message : "contains many"
+    Tag }o--o{ PartyTags : "is associated with many"
+    PartyTags ||--o| UserPartyTags : "is tagged by"
+    Tag }o--o{ ForumTags : "categorizes many"
+    ForumTags }o--o{ ForumCategory : "is part of many"
+    ForumCategory }o--o{ Forum : "is categorized by many"
+    User ||--o| UserPartyTags : "is linked to many"
+    Tag }o--o{ NewsTags : "tags many"
+    NewsTags }o--o{ PoliticalNewsCategory : "categorizes many"
+    PoliticalNewsCategory }o--o{ PoliticalNews : "tags many"
+
+
+
+
+
+
+

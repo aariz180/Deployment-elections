@@ -1,0 +1,77 @@
+classDiagram
+namespace FrontEnd {
+    class UserComponent {
+        + displayLoginForm()
+        + displayRegistrationForm()
+        + handleLogin()
+        + handleRegister()
+        + showUserProfile(user: User)
+        + handleProfileUpdate()
+    }
+
+    class PartyComponent {
+        + displayPartyList(parties: Party[])
+        + handlePartySelection(partyId: int)
+        + displayPartyDetails(party: Party)
+    }
+
+    class MessageComponent {
+        + displayMessages(messages: Message[])
+        + handleSendMessage(message: string, matchId: int)
+        + displayMessageInput()
+    }
+
+    class APIService {
+        + fetchUserProfile(userId: int)
+        + login(email: string, password: string)
+        + register(userData: User)
+        + fetchParties()
+        + swipeUser(swipedUserId: int, direction: string)
+        + fetchMatches()
+        + sendMessage(matchId: int, content: string)
+    }
+
+}
+
+%% Component interactions
+    UserComponent --> APIService : "Calls API"
+    PartyComponent --> APIService : "Fetches parties"
+    MessageComponent --> APIService : "Sends messages"
+
+namespace BackEnd {
+    class User {
+        - int userId
+        - string name
+        - string email
+        - string password
+        - int politicalOrientation
+        - datetime createdAt
+        + register(name, email, password)
+        + login(email, password)
+        + editProfile(email, password)
+        + getParty(userId)
+    }
+
+    class Party {
+        - int partyId
+        - string name
+        - string description
+        + getParties()
+        + getPartyById(partyId)
+    }
+
+    class Message {
+        - int messageId
+        - int userId
+        - int forumId
+        - text content
+        - datetime timestamp
+        + sendMessage(forumId, content)
+        + editMessage(messageId, content)
+        + deleteMessage(messageId)
+        + retrieveMessages(userId)
+    }
+}
+
+    User "0..1" --> "0..1" Party
+    User "0..n" --> "0..n" Message

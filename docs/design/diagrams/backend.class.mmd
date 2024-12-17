@@ -1,0 +1,40 @@
+%% NOTE: Make sure that you use the Mermaid plug in to see the diagram!
+
+classDiagram
+    class User {
+        - int id
+        - string name
+        - string email
+        - string password
+        - int politicalOrientation
+        - datetime createdAt
+        - datetime updatedAt
+        + register()
+        + login()
+        + editProfile()
+        + swipeOnUser(targetUserId, direction)
+        + viewMatches()
+        + sendMessage(matchId, content)
+        + getVotedParty()
+    }
+
+    class Party {
+        - int partyId
+        - string name
+        - string description
+        + getParties()
+        + addParty(name, description)
+    }
+
+    class Message {
+        - int messageId
+        - int matchId
+        - int senderUserId
+        - string content
+        - datetime timestamp
+        + sendMessage(matchId, senderUserId, content)
+        + retrieveMessages(matchId)
+    }
+
+    User "0..1" --> "0..1" Party
+    User "0..n" --> "0..n" Message

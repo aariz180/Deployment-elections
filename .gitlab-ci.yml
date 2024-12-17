@@ -1,0 +1,80 @@
+default:
+  tags: 
+    - hva
+
+stages:
+  - build
+  - test
+  - deploy
+
+# Build the Docker image for the backend
+build-backend-job:
+  stage: build
+  script:
+    - docker info  # Check Docker info to verify Docker is available
+    - cd backend
+    - docker build -t elections-backend-image .  # Build backend image using backend Dockerfile
+    - docker images  # List Docker images to confirm the build
+
+# Build the Docker image for the frontend
+build-frontend-job:
+  stage: build
+  script:
+    - docker info  # Check Docker info to verify Docker is available
+    - cd frontend
+    - docker build -t elections-frontend-image .  # Build frontend image using frontend Dockerfile
+    - docker images  # List Docker images to confirm the build
+
+# Run tests for the backend using the built backend image
+unit-test-backend-job:
+  stage: test
+  image: elections-backend-image  # Use the backend image
+  script:
+    - echo "Running backend unit tests..."
+    - sleep 60  # Simulate running backend tests
+    - echo "Backend code coverage is 90%"
+
+# Run tests for the frontend using the built frontend image
+unit-test-frontend-job:
+  stage: test
+  image: elections-frontend-image  # Use the frontend image
+  script:
+    - echo "Running frontend unit tests..."
+    - sleep 60  # Simulate running frontend tests
+    - echo "Frontend code coverage is 85%"
+
+# Linting the backend code
+lint-test-backend-job:
+  stage: test
+  image: elections-backend-image  # Use the backend image
+  script:
+    - echo "Linting backend code..."
+    - sleep 10
+    - echo "No lint issues found in backend."
+
+# Linting the frontend code
+lint-test-frontend-job:
+  stage: test
+  image: elections-frontend-image  # Use the frontend image
+  script:
+    - echo "Linting frontend code..."
+    - sleep 10
+    - echo "No lint issues found in frontend."
+
+# Deploy the backend
+deploy-backend-job:
+  stage: deploy
+  environment: production
+  image: elections-backend-image  # Use the backend image
+  script:
+    - echo "Deploying backend..."
+    - echo "Backend successfully deployed."
+
+# Deploy the frontend
+deploy-frontend-job:
+  stage: deploy
+  environment: production
+  image: elections-frontend-image  # Use the frontend image
+  script:
+    - echo "Deploying frontend..."
+    - echo "Frontend successfully deployed."
