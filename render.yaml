@@ -1,0 +1,25 @@
+services:
+  - name: elections-backend
+    type: web
+    runtime: docker
+    rootDir: elections-backend  # Points to the backend directory
+    dockerContext: elections-backend  # Correct build context
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://oege.ie.hva.nl:3306/zeijky1?useSSL=true
+      - key: SPRING_DATASOURCE_USERNAME
+        value: eijky1
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: dDeaGhAyipadFk.t
+      - key: SERVER_PORT
+        value: 8080
+
+  - name: elections-frontend
+    type: static
+    rootDir: elections-frontend  # Points to the frontend directory
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://elections-backend.onrender.com/api/v1
