@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 import { ref, onMounted, computed } from 'vue'
 import OverviewBox from '@/components/OverviewBox.vue'
-import axios from 'axios'
+import axiosInstance from '../Axios'; // Use the axios instance
 
 const parties = ref([]) // Create a reactive variable for storing the list of political parties
 const selectedFilter = ref('Standard Layout') // Default filter option
 const searchQuery = ref('') // Holds the search input value
 
 onMounted(async () => {
-    try {
-        const response = await axios.get('http://localhost:8080/parties/all')
-        parties.value = response.data
-        console.log('Retrieved partyOverview data:', parties.value)
-    } catch (error) {
-        console.error('Error fetching partyOverview data:', error)
-    }
+  try {
+    const response = await axiosInstance.get('/parties/all');
+    parties.value = response.data;
+    console.log('Retrieved partyOverview data:', parties.value);
+  } catch (error) {
+    console.error('Error fetching partyOverview data:', error);
+  }
 })
 
 // Function to get the image URL based on party name
