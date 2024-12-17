@@ -39,6 +39,7 @@ public class SecurityConfig {
                     CorsConfiguration config = new CorsConfiguration();
                     config.addAllowedOrigin("http://localhost:3000");
                     config.addAllowedOrigin("https://deployment-elections.onrender.com");
+                    config.addAllowedOrigin("https://deployment-elections-1.onrender.com");
                     config.addAllowedHeader("*");  // Allow all headers
                     config.addAllowedMethod("*");  // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
                     return config;
