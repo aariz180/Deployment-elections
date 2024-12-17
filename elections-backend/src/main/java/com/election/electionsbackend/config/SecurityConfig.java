@@ -37,7 +37,8 @@ public class SecurityConfig {
                         // Lambda expression defining the CORS configuration logic
                         cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.addAllowedOrigin("http://localhost:3000");  // Allow front-end origin
+                    config.addAllowedOrigin("http://localhost:3000");
+                    config.addAllowedOrigin("https://deployment-elections.onrender.com");
                     config.addAllowedHeader("*");  // Allow all headers
                     config.addAllowedMethod("*");  // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
                     return config;
